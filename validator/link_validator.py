@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-class AValidator:
+class linkValidator:
     def has_valid_links(self, soup):
         valid = True
         for link in soup.find_all('a'):
