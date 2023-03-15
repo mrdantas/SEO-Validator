@@ -1,12 +1,12 @@
 import requests
-from bs4 import BeautifulSoup
-
 class ImgValidator:
     def has_img(self, soup):
         for img in soup.find_all('img'):
             if 'src' not in img.attrs:
-                return False
-            response = requests.get(img['src'], stream=True)
-            if response.status_code != 200:
-                return False
-        return True
+                print(f'Tag <img> without "src" atribute: {img}')
+            elif img['src'].startswith('https://'):
+                response = requests.get(img['src'])
+                if response.status_code == 404:
+                    print(f'Image {img["src"]} not found')
+            else:
+                print(f'Tag <img> with invalid link: {img}')
